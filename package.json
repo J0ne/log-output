@@ -1,0 +1,26 @@
+{
+  "name": "log-output",
+  "version": "1.0.0",
+  "description": "Simple app for testing usage",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "node ./src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/J0ne/log-output.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/J0ne/log-output/issues"
+  },
+  "homepage": "https://github.com/J0ne/log-output#readme",
+  "devDependencies": {
+    "express": "^4.17.1"
+  },
+  "dependencies": {
+    "uuid": "^8.3.2"
+  }
+}
