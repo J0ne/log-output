@@ -3,15 +3,18 @@ const { v4: uuidv4 } = require("uuid");
 
 const app = express();
 const port = 3000;
-const randomString = uuidv4();
+let currentStatus;
+
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send(currentStatus);
 });
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 
   setInterval(() => {
-    console.log(`${new Date().toISOString()} - ${randomString}`);
+    const uid = uuidv4();
+    currentStatus = `-> ${new Date().toISOString()} - ${uid}`;
+    console.log(currentStatus);
   }, 5000);
 });
