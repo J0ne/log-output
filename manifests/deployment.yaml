@@ -12,6 +12,35 @@ spec:
       labels:
         app: log-output
     spec:
+      volumes: # Define volume
+        - name: log-files
+          emptyDir: {}
       containers:
-        - name: log-output
-          image: j0ne/log_output:1.2
+        - name: writer
+          image: j0ne/log_output:writer-latest-1
+          volumeMounts: # Mount volume
+          - name: log-files
+            mountPath: /usr/src/files
+        - name: reader
+          image: j0ne/log_output:reader-latest-3.1
+          volumeMounts: # Mount volume
+          - name: log-files
+            mountPath: /usr/src/files
+
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: log-output-dep
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: log-output
+#   template:
+#     metadata:
+#       labels:
+#         app: log-output
+#     spec:
+#       containers:
+#         - name: log-output
+#           image: j0ne/log_output:1.2
