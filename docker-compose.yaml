@@ -1,0 +1,25 @@
+version: "3.5"
+
+services:
+  reader:
+    image: j0ne/logoutput:reader-latest3
+    environment:
+      - APP_MODE=reader
+      - PORT=3001
+    ports:
+      - 3002:3001
+    volumes:
+      - files:/src/files/log.txt
+
+  
+  writer:
+    build: .
+    ports:
+      - 3004:3003
+    volumes:
+      - files:/src/files/log.txt
+  
+volumes:
+  files:
+
+    
