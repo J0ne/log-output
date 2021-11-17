@@ -7,13 +7,21 @@ const fsPromises = require("fs").promises;
 
 const directory = path.join("/", "usr", "src", "files");
 const filePath = path.join(directory, "log.txt");
+const filePathPong = path.join(directory, "pong.txt");
 const app = express();
 
 const port = process.env.PORT || 3000;
 let currentStatus;
 
 app.get("/", (req, res) => {
-  res.send(currentStatus);
+  console.log("request... reading file:", filePathPong);
+  fs.readFile(filePathPong, (error, data) => {
+      if(error){
+          console.log('error in reading file', error);
+      }
+      console.log('got file', data);
+      res.send(`${currentStatus}<br/>${data}`);
+  });
 });
 
 const startWriting = async () => {
@@ -40,8 +48,8 @@ const writeToFile = async (msg) => {
 const readLogFile = async () => {
   fsPromises
     .readFile(filePath)
-    .then(result => {
-      currentStatus = `Read from file: ${result} ${uuidv4()}`;
+    .then((result) => {
+      currentStatus = `${result} ${uuidv4()}`;
       console.log(currentStatus);
     })
     .catch((error) => console.log(error));
