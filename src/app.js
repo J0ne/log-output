@@ -1,6 +1,7 @@
 const express = require("express");
 const config = require("../config.js");
 const path = require("path");
+const axios = require("axios");
 const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
 const fsPromises = require("fs").promises;
@@ -13,15 +14,24 @@ const app = express();
 const port = process.env.PORT || 3000;
 let currentStatus;
 
+// app.get("/", (req, res) => {
+//   console.log("request... reading file:", filePathPong);
+//   fs.readFile(filePathPong, (error, data) => {
+//       if(error){
+//           console.log('error in reading file', error);
+//       }
+//       console.log('got file', data);
+//       res.send(`${currentStatus}<br/>${data}`);
+//   });
+// });
+
 app.get("/", (req, res) => {
-  console.log("request... reading file:", filePathPong);
-  fs.readFile(filePathPong, (error, data) => {
-      if(error){
-          console.log('error in reading file', error);
-      }
-      console.log('got file', data);
-      res.send(`${currentStatus}<br/>${data}`);
-  });
+  const response = axios
+    .get("http://pingpong-svc/pingpong")
+    .then((response) => {
+      console.log('response from "http://pingpong-svc/pingpong', response);
+      res.send(`${currentStatus}<br/>${response.data}`);
+    }).catch(err => console.log('error in fetching pingpong-svc', err));
 });
 
 const startWriting = async () => {
