@@ -17,7 +17,7 @@ spec:
           emptyDir: {}
       containers:
         - name: writer
-          image: j0ne/log_output:writer-latest-2
+          image: j0ne/log_output:writer-latest-5
           volumeMounts: # Mount volume
           - name: log-files
             mountPath: /usr/src/files

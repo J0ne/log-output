@@ -18,7 +18,7 @@ spec:
            claimName: log-output-claim
       containers:
         - name: writer
-          image: j0ne/log_output:writer-latest-4
+          image: j0ne/log_output:writer-latest-5.1
           volumeMounts: # Mount volume
           - name: shared-logs
             mountPath: /usr/src/files
@@ -27,9 +27,9 @@ spec:
           volumeMounts: # Mount volume
           - name: shared-logs
             mountPath: /usr/src/files
-        - name: pingpong
-          image: j0ne/pingpong:write-latest-3
-          volumeMounts: # Mount volume
-          - name: shared-logs
-            mountPath: /usr/src/files
+        # - name: pingpong
+        #   image: j0ne/pingpong:write-latest-3
+        #   volumeMounts: # Mount volume
+        #   - name: shared-logs
+        #     mountPath: /usr/src/files
 
