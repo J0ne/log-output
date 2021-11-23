@@ -12,6 +12,7 @@ const filePathPong = path.join(directory, "pong.txt");
 const app = express();
 
 const port = process.env.PORT || 3000;
+const message = process.env.MESSAGE || "Didn't got any message from env :("; 
 let currentStatus;
 
 // app.get("/", (req, res) => {
@@ -30,7 +31,7 @@ app.get("/", (req, res) => {
     .get("http://pingpong-svc/pingpong")
     .then((response) => {
       console.log('response from "http://pingpong-svc/pingpong', response);
-      res.send(`${currentStatus}<br/>${response.data}`);
+      res.send(`${message}<br/>${currentStatus}<br/>${response.data}`);
     }).catch(err => console.log('error in fetching pingpong-svc', err));
 });
 
@@ -46,7 +47,7 @@ const startWriting = async () => {
 const writeToFile = async (msg) => {
   try {
     await fsPromises.writeFile(filePath, msg);
-    console.log(`${msg} > log.txt`);
+    console.log(`${message} ${msg} > log.txt`);
   } catch (error) {
     console.log(error);
   }

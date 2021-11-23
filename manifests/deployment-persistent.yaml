@@ -19,7 +19,7 @@ spec:
            claimName: log-output-claim
       containers:
         - name: writer
-          image: j0ne/log_output:writer-latest-5.1
+          image: j0ne/log_output:writer-latest-6-env
           volumeMounts: # Mount volume
           - name: shared-logs
             mountPath: /usr/src/files
