@@ -18,12 +18,12 @@ spec:
           emptyDir: {}
       containers:
         - name: writer
-          image: j0ne/log_output:writer-latest-6-env
+          image: j0ne/log_output:writer-latest-7
           envFrom:
           - configMapRef:
               name: logoutput-config
         - name: reader
-          image: j0ne/log_output:reader-latest-3.1
+          image: j0ne/log_output:reader-latest-4
           volumeMounts: # Mount volume
           - name: log-files
             mountPath: /usr/src/files
