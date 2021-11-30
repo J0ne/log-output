@@ -31,7 +31,7 @@ app.get("/", (req, res) => {
     .get("http://pingpong-svc/pingpong")
     .then((response) => {
       console.log('response from "http://pingpong-svc/pingpong', response);
-      res.send(`${message}<br/>${currentStatus}<br/>${response.data}`);
+      res.status(200).send(`${message}<br/>${currentStatus}<br/>${response.data}`);
     }).catch(err => console.log('error in fetching pingpong-svc', err));
 });
 
