@@ -27,6 +27,12 @@ spec:
           volumeMounts: # Mount volume
           - name: log-files
             mountPath: /usr/src/files
+          readinessProbe:
+            initialDelaySeconds: 10 # Initial delay until the readiness is tested
+            periodSeconds: 5 # How often to test
+            httpGet:
+               path: /healthz
+               port: 3541
 
 # apiVersion: apps/v1
 # kind: Deployment

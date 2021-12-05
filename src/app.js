@@ -25,6 +25,15 @@ let currentStatus;
 //       res.send(`${currentStatus}<br/>${data}`);
 //   });
 // });
+app.get('/healthz', (req, resp) => {
+  axios
+    .get("http://pingpong-svc")
+    .then((response) => {
+      resp.status(200).send('Connection to BE ok!')
+    })
+    .catch(er => resp.status(500).send('Not ok :('));
+
+})
 
 app.get("/", (req, res) => {
   const response = axios
