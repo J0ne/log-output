@@ -18,21 +18,21 @@ spec:
           emptyDir: {}
       containers:
         - name: writer
-          image: j0ne/log_output:writer-latest-10.11
-          readinessProbe:
-            initialDelaySeconds: 15 # Initial delay until the readiness is tested
-            periodSeconds: 5 # How often to test
-            httpGet:
-              path: /healthz
-              port: 3005
+          image: j0ne/log_output:writer-latest-8
           envFrom:
           - configMapRef:
               name: logoutput-config
         - name: reader
-          image: j0ne/log_output:reader-latest
+          image: j0ne/log_output:reader-latest-4
           volumeMounts: # Mount volume
           - name: log-files
             mountPath: /usr/src/files
+          readinessProbe:
+            initialDelaySeconds: 10 # Initial delay until the readiness is tested
+            periodSeconds: 5 # How often to test
+            httpGet:
+               path: /healthz
+               port: 3541
 
 # apiVersion: apps/v1
 # kind: Deployment
