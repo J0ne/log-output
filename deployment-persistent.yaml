@@ -16,15 +16,21 @@ spec:
       volumes:
         - name: shared-logs
           persistentVolumeClaim:
-           claimName: log-output-claim
+           claimName: log-output-pvc
       containers:
         - name: writer
-          image: j0ne/log_output:writer-latest-7
+          image: j0ne/log_output:writer-latest-10.9
           volumeMounts: # Mount volume
           - name: shared-logs
             mountPath: /usr/src/files
+          readinessProbe:
+            initialDelaySeconds: 15 # Initial delay until the readiness is tested
+            periodSeconds: 5 # How often to test
+            httpGet:
+              path: /healthz
+              port: 3005
         - name: reader
-          image: j0ne/log_output:reader-latest-4
+          image: j0ne/log_output:reader-latest
           volumeMounts: # Mount volume
           - name: shared-logs
             mountPath: /usr/src/files
